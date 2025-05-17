@@ -1,0 +1,55 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+
+// Simulación de datos: tiempos por categoría
+const tiempos = {
+	pro: [
+		{ nombre: 'Jorge Lopez', tiempo: '1:32.456', escuderia: 'Rayos Veloces' },
+		{ nombre: 'Luis Mendoza', tiempo: '1:34.120', escuderia: 'Furia Roja' },
+	],
+	evo: [
+		{ nombre: 'Carlos Torres', tiempo: '1:39.876', escuderia: 'Águilas del Sur' },
+		{ nombre: 'Damián Vega', tiempo: '1:41.103', escuderia: 'Trueno Azul' },
+	],
+	rookie: [
+		{ nombre: 'Tomás Ramírez', tiempo: '1:47.555', escuderia: 'Escorpiones' },
+		{ nombre: 'Marcos Díaz', tiempo: '1:50.210', escuderia: 'Jaguares' },
+	],
+}
+---
+
+<DefaultLayout title="Tiempos de la Última Carrera">
+	<section class="py-16">
+		<div class="container mx-auto px-4">
+			<h1 class="mb-8 text-center text-4xl font-bold text-blue-600">Tiempos - Última Carrera</h1>
+
+			{
+				Object.entries(tiempos).map(([categoria, pilotos]) => (
+					<div class="mb-12">
+						<h2 class="mb-4 text-2xl font-semibold text-gray-800 capitalize">{categoria}</h2>
+						<div class="overflow-x-auto">
+							<table class="min-w-full table-auto border-collapse border border-gray-300 text-left">
+								<thead>
+									<tr class="bg-gray-100 text-gray-400">
+										<th class="border px-4 py-2">Piloto</th>
+										<th class="border px-4 py-2">Escudería</th>
+										<th class="border px-4 py-2">Tiempo</th>
+									</tr>
+								</thead>
+								<tbody>
+									{pilotos.map((piloto) => (
+										<tr class="border-t">
+											<td class="border px-4 py-2">{piloto.nombre}</td>
+											<td class="border px-4 py-2">{piloto.escuderia}</td>
+											<td class="border px-4 py-2 font-semibold text-blue-600">{piloto.tiempo}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+</DefaultLayout>

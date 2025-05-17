@@ -1,0 +1,55 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+
+const proximaFecha = {
+	evento: 'KCP Karting Club Paraguayo Formuleros Cup',
+	fecha: '2025-05-18',
+	hora: '13:00',
+	ubicacion: 'KCP Karting Club Paraguayo',
+}
+
+const pageTitle = `Próxima Fecha - ${proximaFecha.evento}`
+---
+
+<DefaultLayout title={pageTitle}>
+	<section class="py-16">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+				{/* Columna izquierda: datos */}
+				<div>
+					<h2 class="mb-4 text-4xl font-bold text-blue-600">Próxima Fecha</h2>
+					<p class="mb-2 text-lg font-semibold">{proximaFecha.evento}</p>
+					<p class="mb-2 text-lg">
+						<strong>Fecha:</strong>{' '}
+						{
+							new Date(proximaFecha.fecha).toLocaleDateString('es-AR', {
+								weekday: 'long',
+								day: 'numeric',
+								month: 'long',
+								year: 'numeric',
+							})
+						}
+					</p>
+					<p class="mb-2 text-lg">
+						<strong>Hora:</strong>
+						{proximaFecha.hora} hs
+					</p>
+					<p class="mb-2 text-lg">
+						<strong>Lugar:</strong>
+						{proximaFecha.ubicacion}
+					</p>
+				</div>
+
+				{/* Columna derecha: imagen circuito */}
+				<div class="overflow-hidden rounded-lg shadow-lg">
+					<img
+						src="../assets/images/ciruito4.jpg"
+						alt="Circuito KCP Karting Club Paraguayo"
+						class="h-auto w-full rounded-lg object-cover"
+						loading="lazy"
+					/>
+				</div>
+			</div>
+		</div>
+	</section>
+</DefaultLayout>

@@ -1,10 +1,7 @@
-// 1. Import utilities from `astro:content`
+// src/content/config.js
 import { defineCollection, z } from 'astro:content'
-
-// 2. Import loader(s)
 import { glob } from 'astro/loaders'
 
-// 3. Define your collection(s)
 const projects = defineCollection({
   loader: glob({ pattern: '**/*.mdx', base: './src/content/projects' }),
   schema: z.object({
@@ -14,5 +11,25 @@ const projects = defineCollection({
   }),
 })
 
-// 4. Export a single `collections` object to register you collection(s)
-export const collections = { projects }
+const escuderias = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/escuderias' }),
+  schema: z.object({
+    nombre: z.string(),
+    pilotos: z.array(z.string()).optional(),
+    descripcion: z.string().optional(),
+    logo: z.string().optional(),
+  }),
+})
+
+const pilotos = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/pilotos' }),
+  schema: z.object({
+    nombre: z.string(),
+    apellido: z.string(),
+    escuderia: z.string(),
+    foto: z.string().optional(),
+    descripcion: z.string().optional(),
+  }),
+})
+
+export const collections = { projects, escuderias, pilotos }

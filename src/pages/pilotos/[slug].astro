@@ -1,0 +1,78 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import { getCollection } from 'astro:content'
+import { Image } from 'astro:assets'
+
+import banderaSrc from '../../assets/images/bandera.png'
+
+export async function getStaticPaths() {
+	const pilotos = await getCollection('pilotos')
+	return pilotos.map((piloto) => ({
+		params: { slug: piloto.id.replace(/\.md$/, '') },
+		props: { piloto },
+	}))
+}
+
+const { piloto } = Astro.props
+const { data } = piloto
+---
+
+<DefaultLayout title={`Piloto: ${data.nombre} ${data.apellido}`}>
+	<section class="py-16">
+		<div class="container mx-auto px-4">
+			<div class="grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
+				{/* Imagen a la izquierda */}
+				<div
+					class="relative h-96 overflow-hidden rounded-lg bg-cover bg-center shadow-md"
+					style={`background-image: url('/assets/pilotos/${data.foto}');`}>
+					<div class="absolute inset-0 bg-black/30"></div>
+					{/* Capa oscura */}
+
+					{/* Bandera superpuesta */}
+					<div class="absolute -right-12 -bottom-20 z-10 h-52 w-52 overflow-visible">
+						<Image src={banderaSrc} alt="Bandera a cuadros" class="h-full w-full object-contain drop-shadow-md" />
+					</div>
+				</div>
+
+				{/* Texto a la derecha, dividido en 2 columnas */}
+				<div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+					<div>
+						<h1 class="text-gradient mb-4 text-4xl font-bold">
+							{data.nombre}
+							{data.apellido}
+						</h1>
+						<p class="mb-2 text-lg">
+							<strong>Escudería:</strong>
+							{data.escuderia}
+						</p>
+						{/* Podés agregar más datos aquí */}
+					</div>
+					<div>
+						{data.descripcion && <p class="leading-relaxed text-gray-400">{data.descripcion}</p>}
+						{/* Otra info extra o contenido */}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-10 text-center">
+			<a
+				href="/pilotos"
+				class="inline-block rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white shadow-md transition-colors hover:bg-blue-700">
+				← Volver a pilotos
+			</a>
+		</div>
+	</section>
+</DefaultLayout>
+
+<style>
+	.text-gradient {
+		background: linear-gradient(
+			315deg,
+			light-dark(var(--color-primary-300), var(--color-secondary-100)) 25%,
+			light-dark(var(--color-secondary-300), var(--color-primary-200))
+		);
+		background-clip: border-box;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+</style>

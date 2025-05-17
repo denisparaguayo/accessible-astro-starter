@@ -2,16 +2,17 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 ---
 
-<DefaultLayout title="404">
-  <section class="my-12">
-    <div class="container">
-      <h1>404</h1>
-    </div>
-  </section>
-  <section class="my-12">
-    <div class="space-content container">
-      <p class="text-2xl">This page does not exist. Don't worry though, we got you.</p>
-      <a class="button" href="/">Let's get you home Astronout 🚀</a>
-    </div>
-  </section>
+<DefaultLayout title="Página no encontrada">
+	<section class="my-24">
+		<div class="container text-center">
+			<h1 class="mb-8 text-6xl font-bold text-red-600">¡Bandera Roja!</h1>
+			<p class="mb-6 text-2xl text-gray-700">Parece que nos hemos salido de la pista... ¡Esta página no existe!</p>
+			<p class="mb-8 text-lg text-gray-700">
+				Pero no te preocupes, el equipo está listo para guiarte de vuelta a la carrera.
+			</p>
+			<a class="rounded-full bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-700" href="/">
+				Volver a la Línea de Salida
+			</a>
+		</div>
+	</section>
 </DefaultLayout>

@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets'
+import type { CollectionEntry } from 'astro:content'
+
+interface Props {
+	piloto: CollectionEntry<'pilotos'>
+}
+
+const { piloto } = Astro.props
+const { data } = piloto
+
+import banderaSrc from '../assets/images/bandera.png'
+---
+
+<a href={`/pilotos/${piloto.slug}`} class="block no-underline transition-shadow duration-200 hover:shadow-xl">
+	<div
+		class="relative flex h-80 w-full flex-col justify-end overflow-hidden rounded-lg bg-cover bg-center shadow-md"
+		style={`background-image: url('/assets/pilotos/${data.foto}');`}>
+		{/* Capa oscura para mejor contraste de texto */}
+		<div class="absolute inset-0 z-0 bg-black/30"></div>
+
+		{/* Contenido textual */}
+		<div class="relative z-10 p-4 text-white">
+			<h3 class="text-xl font-bold">
+				{data.nombre}
+				{data.apellido}
+			</h3>
+			<p class="text-sm">Escudería: {data.escuderia}</p>
+		</div>
+
+		{/* Bandera superpuesta */}
+		<div class="absolute -right-10 -bottom-14 z-10 h-46 w-46 overflow-visible">
+			<Image src={banderaSrc} alt="Bandera a cuadros" class="h-full w-full object-contain drop-shadow-md" />
+		</div>
+	</div>
+</a>
