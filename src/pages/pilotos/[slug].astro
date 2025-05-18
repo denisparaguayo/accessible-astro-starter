@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { piloto } = Astro.props
 const { data } = piloto
-const pageImage = `/assets/pilotos/${data.foto}`
+const pageImage = `assets/pilotos/${data.foto}`
 ---
 
 <DefaultLayout image={pageImage} title={`Piloto: ${data.nombre} ${data.apellido}`}>
