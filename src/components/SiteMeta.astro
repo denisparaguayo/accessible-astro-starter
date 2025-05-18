@@ -20,7 +20,7 @@ interface Props {
 	 */
 	url: string
 	/**
-	 * The image path for social sharing
+	 * The image path for social sharing (should be relative to the root public directory)
 	 */
 	image: string
 	/**
@@ -30,8 +30,17 @@ interface Props {
 }
 
 const { title, description, url, image, author = '@formuleros_py' } = Astro.props
+
+// Construct the absolute URL for the image
+const siteUrl = new URL(Astro.site).origin
+const absoluteImageUrl = `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`
 ---
 
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+<title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content={author} />
@@ -40,17 +49,18 @@ const { title, description, url, image, author = '@formuleros_py' } = Astro.prop
 <meta property="og:description" content={description} />
 <meta property="og:type" content="website" />
 <meta property="og:url" content={url} />
-<meta property="og:image" content={`${Astro.site}${image}`} />
+<meta property="og:image" content={absoluteImageUrl} />
+<meta property="og:image:alt" content={`Imagen de vista previa para ${title}`} />
 
-<!-- Etiquetas para Twitter-->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:title" content={title} />
-<meta name="twitter:image" content={image} />
+<meta name="twitter:image" content={absoluteImageUrl} />
+<meta name="twitter:image:alt" content={`Imagen de vista previa para ${title}`} />
 <meta name="twitter:site" content="@formuleros_py" />
 <meta name="twitter:creator" content="@formuleros_py" />
-<meta name="twitter:domain" content="formuleros.netlify.app" />
+<meta name="twitter:domain" content={new URL(Astro.site).hostname} />
 
-<title>{title}</title>
+<link rel="canonical" href={url} />
 
 <ViewTransitions />
