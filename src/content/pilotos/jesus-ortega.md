@@ -2,7 +2,7 @@
 nombre: 'Jesus'
 apellido: 'Ortega'
 escuderia: '"Mbarete Racing"'
-foto: 'juan.webp'
+foto: 'jesus.jpg'
 descripcion: ''
 ---
 
