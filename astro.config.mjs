@@ -11,7 +11,7 @@ import path from 'path'
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  site: 'https://formuleros.netlify.app/',
+  site: 'https://formuleros.netlify.app',
   integrations: [mdx(), icon(), compress(), react()], // Agrega 'react()' a las integraciones
   vite: {
     css: {
