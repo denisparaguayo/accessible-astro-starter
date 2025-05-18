@@ -9,18 +9,18 @@ const {
 	title = 'Torneo Amateur de Karting',
 	description = 'Sitio web oficial del torneo amateur de karting organizado por @formuleros_py.',
 	url = Astro.site,
-	image = '/images/social-preview.png', // Ajusta la ruta si es necesario
+	image = '/images/formuleros.jpg', // Ajusta la ruta si es necesario
 	author = '@formuleros_py',
 } = Astro.props
 ---
 
-<html lang="es" dir="ltr">
+<html lang="es" dir="ltr" class="dark">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/vnd.microsoft.icon" href="/formulerosfb.ico" />
 
 		<SiteMeta title={title} description={description.substring(0, 100)} url={url} image={image} author={author} />
 	</head>

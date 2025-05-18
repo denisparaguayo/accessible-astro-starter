@@ -1,8 +1,10 @@
+// astro.config.mjs
 import { defineConfig } from 'astro/config'
 import mdx from '@astrojs/mdx'
 import compress from 'astro-compress'
 import icon from 'astro-icon'
 import tailwindcss from '@tailwindcss/vite'
+import react from '@astrojs/react' // Importa la integración de React
 import { fileURLToPath } from 'url'
 import path from 'path'
 
@@ -10,7 +12,7 @@ import path from 'path'
 export default defineConfig({
   compressHTML: true,
   site: 'https://accessible-astro-starter.incluud.dev',
-  integrations: [mdx(), icon(), compress()],
+  integrations: [mdx(), icon(), compress(), react()], // Agrega 'react()' a las integraciones
   vite: {
     css: {
       preprocessorOptions: {

@@ -1,0 +1,27 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PilotCard from '@components/PilotCard.astro'
+import { getCollection } from 'astro:content'
+
+// Obtener la colección y agregar el slug a cada piloto (sin extensión .md)
+const pilotos = await getCollection('pilotos')
+const pilotosConSlug = pilotos.map((piloto) => ({
+	...piloto,
+	slug: piloto.id.replace(/\.md$/, ''),
+}))
+
+const pageTitle = 'Pilotos del Torneo'
+---
+
+<DefaultLayout title={pageTitle}>
+	<section class="py-16">
+		<div class="container mx-auto px-4">
+			<h1 class="mb-8 text-center text-4xl font-bold text-blue-600 lg:text-left">
+				{pageTitle}
+			</h1>
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+				{pilotosConSlug.map((piloto) => <PilotCard piloto={piloto} />)}
+			</div>
+		</div>
+	</section>
+</DefaultLayout>

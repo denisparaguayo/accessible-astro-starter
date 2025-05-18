@@ -13,14 +13,25 @@ const escuderias = await getCollection('escuderias')
 	<Hero />
 	<section class="my-64">
 		<div class="container">
-			<h2 class="mb-16 text-6xl">Escuderías Participantes</h2>
+			<h2 class="mb-16 text-4xl">Escuderías Participantes</h2>
 			<section class="mt-16">
 				<h2 class="mb-8 text-center text-3xl font-bold text-blue-600 lg:text-left">Nuestros Equipos</h2>
 				<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 					{
 						escuderias.map((escuderia) => (
-							<Feature icon="lucide:flag" title={escuderia.data.nombre}>
-								Pilotos: {escuderia.data.pilotos?.join(', ')}
+							<Feature icon="lucide:flag" title={escuderia.data.nombre.replace(/"/g, '')}>
+								{escuderia.data.pilotos && escuderia.data.pilotos.length > 0 ? (
+									<ul>
+										{escuderia.data.pilotos
+											.flatMap((piloto) => piloto.split('-'))
+											.map((nombrePiloto) => nombrePiloto.trim().replace(/[\[\]"]/g, '')) // Elimina corchetes y comillas
+											.map((nombreLimpio) => (
+												<li key={nombreLimpio}>Piloto: {nombreLimpio}</li>
+											))}
+									</ul>
+								) : (
+									'No hay pilotos registrados.'
+								)}
 							</Feature>
 						))
 					}
